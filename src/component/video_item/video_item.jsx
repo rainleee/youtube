@@ -1,7 +1,20 @@
 import React from 'react';
 
 const VideoItem = props => {
-    return <h1>{props.video.snippet.title}</h1>
+    let viewCount = props.video.statistics.viewCount;
+
+    if (viewCount.length > 5) {
+        viewCount = viewCount.split(viewCount.slice(-4))[0] + '만회';
+    }
+
+    return (
+        <div className="video-detail">
+            <img src={props.video.snippet.thumbnails.medium.url} alt="" />
+            {props.video.snippet.title}
+            {props.video.snippet.channelTitle}
+            {viewCount}
+        </div>
+    );
 };
 
 
