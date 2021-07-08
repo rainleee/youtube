@@ -5,7 +5,7 @@ const VideoList = props => {
     // console.log(props);
     return (
         <ul>
-            {props.videos.map(video => <VideoItem key={video.id} video={video} />)}
+            {props.videos.map(video => <VideoItem key={video.id} video={video} onVideoDetail={props.onVideoDetail} />)}
         </ul>);
 };
 
