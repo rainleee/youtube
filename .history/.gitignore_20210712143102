@@ -4,8 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-config.js
-
+git-ignore/config.js
 
 # testing
 /coverage
