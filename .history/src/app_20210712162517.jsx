@@ -7,7 +7,6 @@ import VideoList from './component/video_list/video_list';
 
 function App() {
   const [videos, setVideos] = useState([]);
-  const [selectVideo, setSelectVideo] = useState(null);
 
   useEffect(() => {
     var requestOptions = {
@@ -21,8 +20,9 @@ function App() {
       .catch(error => console.log('error', error));
   }, []);
 
-  const handleVideoDetail = video => {
-    setSelectVideo(video);
+  const handleVideoDetail = (id) => {
+    alert(`app.jsx ${id}`);
+    return <VideoDetail id={id} />;
   }
 
 
@@ -30,7 +30,6 @@ function App() {
   return (
     <>
       <Navbar />
-      {selectVideo && <VideoDetail video={selectVideo}/> }
       <VideoList videos={videos} onVideoDetail={handleVideoDetail} />
     </>
   );

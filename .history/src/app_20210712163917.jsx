@@ -21,8 +21,9 @@ function App() {
       .catch(error => console.log('error', error));
   }, []);
 
-  const handleVideoDetail = video => {
-    setSelectVideo(video);
+  const handleVideoDetail = (id) => {
+    
+    return <VideoDetail id={id} />;
   }
 
 

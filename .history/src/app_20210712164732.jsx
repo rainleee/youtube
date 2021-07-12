@@ -22,7 +22,7 @@ function App() {
   }, []);
 
   const handleVideoDetail = video => {
-    setSelectVideo(video);
+    setSelectVideo(selectVideo)
   }
 
 

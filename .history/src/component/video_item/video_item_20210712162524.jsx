@@ -9,8 +9,7 @@ const VideoItem = props => {
     
 
     const onVideoDetail = () => {
-        //id => 다른것으로 교체할 것.
-        props.onVideoDetail(props.video);
+        props.onVideoDetail(props.video.id);
     }
 
     return (

@@ -21,8 +21,9 @@ function App() {
       .catch(error => console.log('error', error));
   }, []);
 
-  const handleVideoDetail = video => {
-    setSelectVideo(video);
+  const handleVideoDetail = (id) => {
+    
+    return <VideoDetail id={id} />;
   }
 
 
@@ -30,7 +31,7 @@ function App() {
   return (
     <>
       <Navbar />
-      {selectVideo && <VideoDetail video={selectVideo}/> }
+      {selectVideo && <selectVideo />}
       <VideoList videos={videos} onVideoDetail={handleVideoDetail} />
     </>
   );
