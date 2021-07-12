@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import './app.css';
-import config from './config.js';
 import Navbar from './component/navbar';
 import VideoDetail from './component/video_detail/video_detail';
 import VideoList from './component/video_list/video_list';
+import a from '../config.js';
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -14,7 +14,7 @@ function App() {
       redirect: 'follow'
     };
 
-    fetch(`https://youtube.googleapis.com/youtube/v3/videos?key=${config.API_KEY}&part=snippet&chart=mostPopular&maxResults=25&regionCode=KR`, requestOptions)
+    fetch(`https://youtube.googleapis.com/youtube/v3/videos?key=AIzaSyCamawjNL_lFrbYSWRVJEldAHquysZREdo&part=snippet&chart=mostPopular&maxResults=25&regionCode=KR&key=AIzaSyCamawjNL_lFrbYSWRVJEldAHquysZREdo`, requestOptions)
       .then(response => response.json())
       .then(result => setVideos(result.items))
       .catch(error => console.log('error', error));

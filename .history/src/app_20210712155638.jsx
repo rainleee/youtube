@@ -6,6 +6,7 @@ import VideoDetail from './component/video_detail/video_detail';
 import VideoList from './component/video_list/video_list';
 
 function App() {
+  console.log(config);
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {

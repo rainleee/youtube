@@ -1,7 +1,7 @@
 import React from 'react';
 
 const VideoItem = props => {
-    //let viewCount = props.video.statistics.viewCount;
+    let viewCount = props.video.statistics.viewCount;
 
     /*
     if (viewCount.length > 5) {
@@ -18,7 +18,7 @@ const VideoItem = props => {
             <img src={props.video.snippet.thumbnails.medium.url} alt="" />
             {props.video.snippet.title}
             {props.video.snippet.channelTitle}
-            {/* {viewCount} */}
+            {viewCount}
         </div >
     );
 };

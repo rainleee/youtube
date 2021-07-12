@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './app.css';
-import config from './config.js';
+import './config';
 import Navbar from './component/navbar';
 import VideoDetail from './component/video_detail/video_detail';
 import VideoList from './component/video_list/video_list';
