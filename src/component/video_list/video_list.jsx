@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import VideoItem from '../video_item/video_item';
 
-const VideoList = ({ videos, onVideoDetail, searchVal }) => {
-
-    console.log(searchVal + '1111');
+const VideoList = ({ videos, onVideoDetail }) => {
 
     return (
         <ul>

@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import config from '../../config';
-import VideoList from '../video_list/video_list';
+import React from 'react';
 
 const Navbar = props => {
 
@@ -9,7 +7,6 @@ const Navbar = props => {
         const searchVal = event.target[0].value;
         searchVal && props.onSearchVideo(searchVal);
     }
-
 
     return (
         <form className="search-form" onSubmit={onSubmitForSearch}>
