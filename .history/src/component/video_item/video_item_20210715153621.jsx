@@ -15,15 +15,13 @@ const VideoItem = ({ video: { snippet }, onVideoDetail: onVideoDetailView }) => 
     }
 
     return (
-        <li className={styles.container}>
-            <div className={styles.video}>
-                <img className={styles.thumbnails} src={snippet.thumbnails.medium.url} alt="video thumbnails" />
-                <div className={styles.metadata} onClick={onVideoDetail}>
-                    <p className={styles.title}>{snippet.title}</p>
-                    <p className={styles.channel}>{snippet.channelTitle}</p>
-                    {/* {viewCount} */}
-                </div >
-            </div>
+        <li className={styles.video}>
+            <img className={styles.thumbnails} src={snippet.thumbnails.medium.url} alt="video thumbnails" />
+            <div className='video-detail' onClick={onVideoDetail}>
+                <p className={styles.title}>{snippet.title}</p>
+                <p className={styles.channel}>{snippet.channelTitle}</p>
+                {/* {viewCount} */}
+            </div >
         </li>
     );
 };
