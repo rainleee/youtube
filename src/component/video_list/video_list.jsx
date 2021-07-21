@@ -4,6 +4,9 @@ import style from './video_list.module.css';
 
 const VideoList = ({ videos, onVideoDetail }) => {
 
+    console.log('videos');
+    console.log(videos);
+
     return (
         <ul className={style.videos}>
             {videos.map(video => <VideoItem key={video.id} video={video} onVideoDetail={onVideoDetail} />)}

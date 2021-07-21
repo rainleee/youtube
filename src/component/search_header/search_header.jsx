@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './search_header.module.css';
 
-const SearchHeader = props => {
+const SearchHeader = ({ onSearchVideo }) => {
+    const searchInput = useRef();
 
-    const onSubmitForSearch = event => {
-        event.preventDefault();
-        const searchVal = event.target[0].value;
-        searchVal && props.onSearchVideo(searchVal);
+
+    const onSearchEvent = () => {
+        const searchVal = searchInput.current.value;
+        onSearchVideo(searchVal);
+    }
+
+    const onKeyPress = event => {
+        if (event.key === 'Enter') onSearchEvent();
     }
 
     return (
@@ -15,7 +20,7 @@ const SearchHeader = props => {
                 <img className={styles.img} src="/images/logo.png" alt="logo" />
                 <h1 className={styles.title}>Youtube</h1>
             </div>
-            <input className={styles.input} type="text" placeholder="검색" />
+            <input className={styles.input} type="text" placeholder="검색" ref={searchInput} onKeyPress={onKeyPress} />
             <button className={styles.button} type="submit">
                 <i className="fas fa-search"></i>
             </button>
