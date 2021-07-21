@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    height: 4rem;
+    padding: 0.5em 1em;
+    background-color: black;
+    color: whitesmoke;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-right: 1em;
+}
+
+.img {
+    height: 2rem;
+    padding-right: 0.5rem;
+}
+
+.title{
+    padding-right: 0.5rem;
+}
+
+.input {
+    flex-basis: 100%;
+    padding-left: 1rem;
+    font-size: 1.2rem;
+    outline: 0;
+    outline-color: gray;
+    align-items: center;
+}
+
+.button {
+    width: 5%;
+}

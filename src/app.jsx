@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import './app.css';
+import styles from './app.module.css';
 import CONFIG from './config.js';
-import Navbar from './component/video_search/navbar';
+import SearchHeader from './component/search_header/search_header';
 import VideoDetail from './component/video_detail/video_detail';
 import VideoList from './component/video_list/video_list';
 
@@ -25,7 +25,6 @@ function App() {
     //   .then(response => response.json())
     //   .then(result => setSearchVideos(result.items))
     //   .catch(error => console.log('error', error))
-    // temp
   }
 
 
@@ -46,13 +45,13 @@ function App() {
 
 
   return (
-    <>
-      <Navbar onSearchVideo={handleSearhVideos} />
+    <div className={styles.app}>
+      <SearchHeader onSearchVideo={handleSearhVideos} />
       {selectVideo && <VideoDetail video={selectVideo} />}
       {searchVideo && <VideoList videos={searchVideo} onVideoDetail={handleVideoDetail} />}
       {!searchVideo && <VideoList videos={videos} onVideoDetail={handleVideoDetail} />}
 
-    </>
+    </div>
   );
 }
 
