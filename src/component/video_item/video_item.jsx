@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './video_item.module.css';
 
-const VideoItem = ({ video: { snippet }, onClickVideo }) => {
+const VideoItem = ({ video, video: { snippet }, onClickVideo }) => {
 
     //Detail event
     const onClickVideoBox = () => {
-        onClickVideo(snippet);
+        onClickVideo(video);
     }
 
     return (
@@ -24,3 +24,19 @@ const VideoItem = ({ video: { snippet }, onClickVideo }) => {
 
 
 export default VideoItem;
+/*
+const onClickVideoBox = () => {
+    onClickVideo(snippet);
+}
+
+return (
+    <li className={styles.container} onClick={onClickVideoBox}>
+        <div className={styles.video}>
+            <img className={styles.thumbnails} src={snippet.thumbnails.medium.url} alt={snippet.title} />
+            <div className={styles.metadata}>
+                <p className={styles.title}>{snippet.title}</p>
+                <p className={styles.channel}>{snippet.channelTitle}</p>
+            </div >
+        </div>
+    </li>
+) */
