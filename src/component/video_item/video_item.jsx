@@ -1,7 +1,13 @@
 import React from 'react';
 import styles from './video_item.module.css';
 
-const VideoItem = ({ video, video: { snippet }, onClickVideo }) => {
+const VideoItem = ({ video, video: { snippet }, onClickVideo, display }) => {
+    console.log('display');
+    console.log(display);
+
+    const displayType = (display === 'list') ? styles.list : styles.grid;
+
+    console.log(displayType);
 
     //Detail event
     const onClickVideoBox = () => {
@@ -9,7 +15,7 @@ const VideoItem = ({ video, video: { snippet }, onClickVideo }) => {
     }
 
     return (
-        <li className={styles.container} onClick={onClickVideoBox}>
+        <li className={`${styles.container} ${displayType}`} onClick={onClickVideoBox} >
             <div className={styles.video}>
                 <img className={styles.thumbnails} src={snippet.thumbnails.medium.url} alt={snippet.title} />
                 <div className={styles.metadata}>
@@ -18,7 +24,7 @@ const VideoItem = ({ video, video: { snippet }, onClickVideo }) => {
                     {/* {viewCount} */}
                 </div >
             </div>
-        </li>
+        </li >
     );
 };
 

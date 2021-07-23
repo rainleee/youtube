@@ -41,19 +41,27 @@ function App({ youtube }) {
   //search videos
   const handleSearhVideos = async query => {
     //search 조건 초기화
-    setSelectVideo(null);
 
     setVideos(
       await youtube.searchVideo(query)
         .catch(error => console.log('error', error))
     );
+    setSelectVideo(null);
   }
 
   return (
     <div className={styles.app}>
       <SearchHeader onSearchVideo={handleSearhVideos} onMainPage={handleMainPage} />
-      {selectVideo && <VideoDetail video={selectVideo} subcribCount={subcribCount} />}
-      <VideoList videos={videos} onClickVideo={handleVideoDetail} />
+      <section className={styles.content}>
+        {selectVideo &&
+          <div className={styles.detail}>
+            <VideoDetail video={selectVideo} subcribCount={subcribCount} />
+          </div>
+        }
+        <div className={styles.list}>
+          <VideoList videos={videos} onClickVideo={handleVideoDetail} display={selectVideo ? 'list' : 'grid'} />
+        </div>
+      </section>
     </div>
   );
 }
