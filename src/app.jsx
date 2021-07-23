@@ -1,82 +1,52 @@
 import { useEffect, useState } from 'react';
 import styles from './app.module.css';
-import CONFIG from './config.js';
 import SearchHeader from './component/search_header/search_header';
 import VideoDetail from './component/video_detail/video_detail';
 import VideoList from './component/video_list/video_list';
 
-function App() {
+function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [selectVideo, setSelectVideo] = useState(null);
   const [subcribCount, setSubcribCount] = useState(0);
 
-  //Fav videos fetch
-  const fetchReqFavVideos = (reqHttps, requestOptions) => {
-    fetch(reqHttps, requestOptions)
-      .then(response => response.json())
-      .then(result => setVideos(result.items))
-      .catch(error => console.log('error', error));
-  }
-
   //init or update 
   useEffect(() => {
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
-
-    fetchReqFavVideos(CONFIG.HTTPS_ADDR, requestOptions);
+    youtube.mostPopular()
+      .then(result => setVideos(result.items))
+      .catch(error => console.log('error', error));
   }, []);
 
   //logo click event
-  const handleMainPage = () => {
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
+  const handleMainPage = async () => {
     setSelectVideo(null);
-    fetchReqFavVideos(CONFIG.HTTPS_ADDR, requestOptions);
-  }
 
-  //set state
-  // const handleVideoDetail = video => setSelectVideo(video);
-  const handleVideoDetail = video => {
-    setSelectVideo(video);
-
-    const reqHttps = `https://youtube.googleapis.com/youtube/v3/channels?key=${CONFIG.API_KEY}&part=statistics&id=${video.snippet.channelId}`;
-
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
-
-    fetch(reqHttps, requestOptions)
-      .then(response => response.json())
-      .then(result => setSubcribCount(result.items[0].statistics.subscriberCount))
+    const result = await youtube.mostPopular()
       .catch(error => console.log('error', error));
 
+    setVideos(result.items);
+  }
+
+  //go to Play video
+  const handleVideoDetail = async video => {
+    setSelectVideo(video);
+
+    const result = await youtube.subscriberCount(video.snippet.channelId)
+      .catch(error => console.log('error', error));
+
+    const subscriberCount = result.items[0].statistics.subscriberCount;
+
+    setSubcribCount(subscriberCount);
   }
 
   //search videos
-  const handleSearhVideos = query => {
+  const handleSearhVideos = async query => {
     //search 조건 초기화
     setSelectVideo(null);
 
-    const reqHttps = `https://youtube.googleapis.com/youtube/v3/search?key=${CONFIG.API_KEY}&type=video&part=snippet&maxResults=25&q=${query}&nextPageToken=CBkQAA`;
-
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
-
-    fetch(reqHttps, requestOptions)
-      .then(response => response.json())
-      .then(result =>
-        result.items.map(item => ({ ...item, id: item.id.videoId }))
-      )
-      .then(items => setVideos(items))
-      .catch(error => console.log('error', error));
-
+    setVideos(
+      await youtube.searchVideo(query)
+        .catch(error => console.log('error', error))
+    );
   }
 
   return (
@@ -102,4 +72,10 @@ export default App;
   test 코드를 만들어서 활용하는 방법으로 구현하기!!!!
 
   세션,쿠키, 로컬스토리지를 이용한 정보 남겨두기 구현해보기
+*/
+
+/*
+  오늘 할 일
+  1. fetch 통신을 하는 컴포넌트가 겹쳐져있기 때문에 그부분을 별도로 구성한다.
+  2.TODO List 익스텐션 깔기
 */

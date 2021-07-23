@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 config.js
+
+# local history
 /.history
 
 
@@ -13,6 +15,9 @@ config.js
 
 # production
 /build
+
+#API KEY
+.env
 
 # misc
 .DS_Store
