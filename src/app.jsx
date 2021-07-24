@@ -16,7 +16,7 @@ function App({ youtube }) {
       .catch(error => console.log('error', error));
   }, []);
 
-  //logo click event
+  //logo click
   const handleMainPage = async () => {
     setSelectVideo(null);
 
@@ -40,12 +40,11 @@ function App({ youtube }) {
 
   //search videos
   const handleSearhVideos = async query => {
-    //search 조건 초기화
-
     setVideos(
       await youtube.searchVideo(query)
         .catch(error => console.log('error', error))
     );
+
     setSelectVideo(null);
   }
 
