@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styles from './app.module.css';
 import SearchHeader from './component/search_header/search_header';
 import VideoDetail from './component/video_detail/video_detail';
@@ -14,17 +14,17 @@ function App({ youtube }) {
     youtube.mostPopular()
       .then(result => setVideos(result.items))
       .catch(error => console.log('error', error));
-  }, []);
+  }, [youtube]);
 
   //logo click
-  const handleMainPage = async () => {
+  const handleMainPage = useCallback(async () => {
     setSelectVideo(null);
 
     const result = await youtube.mostPopular()
       .catch(error => console.log('error', error));
 
     setVideos(result.items);
-  }
+  }, [youtube]);
 
   //go to Play video
   const handleVideoDetail = async video => {
@@ -39,17 +39,18 @@ function App({ youtube }) {
   }
 
   //search videos
-  const handleSearhVideos = async query => {
+  const handleSearhVideos = useCallback(async query => {
     setVideos(
       await youtube.searchVideo(query)
         .catch(error => console.log('error', error))
     );
 
     setSelectVideo(null);
-  }
+  }, [youtube]);
 
   return (
     <div className={styles.app}>
+      {/* <SearchHeader onSearchVideo={handleSearhVideos} /> */}
       <SearchHeader onSearchVideo={handleSearhVideos} onMainPage={handleMainPage} />
       <section className={styles.content}>
         {selectVideo &&

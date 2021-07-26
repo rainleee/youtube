@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './video_detail.module.css';
 
-const VideoDetail = ({ video, video: { snippet }, video: { id }, video: { statistics }, subcribCount }) => {
+const VideoDetail = ({ video: { snippet }, video: { id }, video: { statistics }, subcribCount }) => {
     // const viewCount = parseInt(statistics.viewCount).toLocaleString('ko-KR');
     const date = new Date(snippet.publishedAt);
     return (
         <section className={styles.detail}>
             <iframe className={styles.video}
                 type="text/html"
+                title="youtube video player"
                 width="100%"
                 height="500"
                 src={`https://www.youtube.com/embed/${id}`}
-                frameborder="0"
-                allowfullscreen
+                frameBorder="0"
+                allowFullScreen
             ></iframe>
             <h2>{snippet.title}</h2>
             {/* <h2>조회수 {viewCount}회</h2> */}
