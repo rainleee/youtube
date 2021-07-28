@@ -12,7 +12,7 @@ function App({ youtube }) {
   //init or update 
   useEffect(() => {
     youtube.mostPopular()
-      .then(result => setVideos(result.items))
+      .then(resultItems => setVideos(resultItems))
       .catch(error => console.log('error', error));
   }, [youtube]);
 
@@ -23,18 +23,15 @@ function App({ youtube }) {
     const result = await youtube.mostPopular()
       .catch(error => console.log('error', error));
 
-    setVideos(result.items);
+    setVideos(result);
   }, [youtube]);
 
-  //go to Play video
+  //go to video Player
   const handleVideoDetail = async video => {
     setSelectVideo(video);
 
-    const result = await youtube.subscriberCount(video.snippet.channelId)
+    const subscriberCount = await youtube.subscriberCount(video.snippet.channelId)
       .catch(error => console.log('error', error));
-
-    const subscriberCount = result.items[0].statistics.subscriberCount;
-
     setSubcribCount(subscriberCount);
   }
 

@@ -13,41 +13,45 @@ class Youtube {
     }
 
     async mostPopular() {
-        const response = this.youtube.get('videos', {
+        const response = await this.youtube.get('videos', {
             params: {
                 part: ['snippet', 'statistics'],
                 chart: 'mostPopular',
                 maxResults: 25,
                 regionCode: 'KR',
             },
-
+            //array bracket remove
             paramsSerializer: params => {
-                console.log('params');
-                console.log(qs.stringify(params));
-                console.log(qs.stringify(params, { arrayFormat: 'repeat' }));
                 return qs.stringify(params, { arrayFormat: 'repeat' });
             }
         })
-
-        console.log('response');
-        console.log(await response);
-        // console.log((await response).data);
-        return (await response).data;
-        // const response = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?key=${this.key}&part=snippet&part=statistics&chart=mostPopular&maxResults=25&regionCode=KR`, this.getRequestOptions);
-        // return await response.json();
+        return response.data.items;
     }
 
     async searchVideo(query) {
-        const response = await fetch(`https://youtube.googleapis.com/youtube/v3/search?key=${this.key}&type=video&part=snippet&maxResults=25&q=${query}&nextPageToken=CBkQAA`, this.getRequestOptions);
-        const result = await response.json();
-        return result.items.map(item => ({ ...item, id: item.id.videoId }));
+        const response = await this.youtube.get('search', {
+            params: {
+                type: 'video',
+                part: 'snippet',
+                maxResults: 25,
+                q: query,
+                nextPageToken: 'CBkQAA',
+            }
+        })
+
+        return response.data.items.map(item => ({ ...item, id: item.id.videoId }));
     }
 
     async subscriberCount(channelId) {
-        const response = await fetch(`https://youtube.googleapis.com/youtube/v3/channels?key=${this.key}&part=statistics&id=${channelId}`, this.getRequestOptions);
-        return await response.json();
-    }
+        const response = await this.youtube.get('channels', {
+            params: {
+                part: 'statistics',
+                id: channelId,
+            }
+        })
 
+        return response.data.items[0].statistics.subscriberCount;
+    }
 }
 
 
