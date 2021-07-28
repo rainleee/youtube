@@ -18,8 +18,54 @@ axios에서는 httpClient주소가 길게 늘어져서 가독성이 안좋았는
 좀 더 가독성을 높임. 
 
 
-axios로 변경 후 APIs 호출 시 중복 파라미터 key값에 대한 삽질결과
-fetch()에서 전체 URL을 적어서 보내던 방식에서 
+
+
+21.07.28 axios로 변경 후 APIs 호출 시 중복 파라미터 key값에 대한 삽질결과
+---
+
+fetch()에서 전체 URL을 적어서 보내던 방식에서 axios를 이용해서 axios.create()와 get() function를 사용해서 객체를 넘겨주는 형식으로 바꿧다.
+그런데 거기서 문제가 발생한것은 mostPopular()에서 주소를 넘겨줄때 param의 key중에 part가 2번 호출된다는 점이었다. fetch로 넘길경우 일일히 다 적었기 떄문에 part=blabla&part=blabla2로 적으면 됐지만  axios의 params{}에 넘길경우에는 
+            params: {
+                part: 'snippet',
+                part: 'statistics',                
+            },
+로 적을 경우  Duplicate key 에러가 발생하여 작동되지 않았다. 구글링한 결과 []에 담아 객체를 보내면 된다기에 손쉽게 끝날 줄 알았는데 여기서부터 긴 삽질이 시작됐다. array에 담아 넘길경우
+URL에 parameter가 part[]=snippet&part[]=statistics 로 표현되어 youtube APIs의 request의 status는 200 OK가 뜨지만 올바른 형식으로 호출을 한게 아니라 받아온 data의 값은 아무것도 없어
+제대로된 data를 출력할 수 없었다. 
+
+여러가지를 검색 후 해결에 도움이 된 페이지는 stackOverflow에 아래 링크의 글이었다.
+
+https://stackoverflow.com/questions/49944387/how-to-correctly-use-axios-params-with-arrays
+
+문제는 나는 []를 없애야 되는데 paramsSerializer를 사용하라는데 return 부분에 qs의 변수가 선언되지 않았는데 return을 주어 잘 이해가 되질 않았다. 라이브러리를 별도로 import해서 사용하는것에 아직 익숙치 않아서 발생한 문제인데, 너무 당연히 import해서 사용하는거라 qs에 대한 import처리부분을 설명해주는곳을 찾을 수 없어 1시간넘게 이부분에서 해맸다.
+
+그러던 도중 기초적인 qs가 어떤건지도 모르는체 코드를 복사 붙여넣기로 따라하는것 같아 qs를 검색 후 찾아 낸곳이 아래 링크의 홈페이지였다.
+
+https://www.npmjs.com/package/qs
+
+qs라이브러리로써 문자열에 대한 function를 제공하는 라이브러리였다. 물론 지금 여러가지를 더 찾아보니 function 직접 구현해서 해당URL을 바꿀 수 있었지만 나는 라이브러리를 쓰는것을 택했다.
+
+yarn을 이용해 
+
+(코드블럭 넣기)
+yarn add qs 를 통해 
+
+dependencies에 추가하고 사용하려는 해당 js에 import하여 사용 준비를 마쳤고,
+axios conifg 항목 중 직렬화를 위해 paramsSerializer 항목에 qs를 이용한 function에 qs의 stringify()를 이용했다. 근데 문제는 해당 URL에
+
+part%5B0%5D=snippet&part%5B1%5D=statistics
+
+%5B0, %5B1등의 문자가 섞여 나오는것이었다 ㅠㅠㅠ
+
+찾아보니 array braket을 URL 인코딩하여 위 형식으로 표기됐단것을 발견했고, 그것에 대한 해결법으로
+
+qs의 stringify 옵션을 'repeat'으로 주어 []을 없이 만드는것으로 해결했다.
+
+qs 사용법 : https://www.npmjs.com/package/qs  arrayFormat 검색
+https://axios-http.com/docs/req_config 
+
+
+별거아닌 일이었지만 이런부분이 미흡한 나에게 필요한 라이브러리를 추가하고 import해서 사용하는방법을 익힌 좋은 시간이었다. 또한 요청 URL을 비교하여 param값이 틀린경우 이에대해 대처하는 방법을 배운것 같다. 
 
 
 
@@ -32,8 +78,3 @@ fetch()에서 전체 URL을 적어서 보내던 방식에서
 참조자료 
 엑시오스 브라우저 호환성: https://github.com/axios/axios
 async 브라우저 호환성 : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function 
-
-
-
-
-qs 사용법 : https://www.npmjs.com/package/qs  arrayFormat 검색
