@@ -1,80 +1,159 @@
+# react와 youtube APIs를 활용한 나만의 youtube site 만들기
 
-youtube APIs를 활용한 clone youtube site
-===
+# youtube DATA APIs
 
-youtube DATA APIs
----
+<!-- 전체개요 작성 -->
 
-코드퀄리티를 높이기 위한 시도
-async await(Promise)에서 axios로 변경한 이유
-1.axios도 똑같이 promise를 사용하지만 다른점은 호환성에서다르다.
-자바스크립트에서 제공하는 async는 브라우저 호환성에서 IE는 지원하지 않는다. 또한 받은 response를 json형식으로 변환해야되는 불편함이 존재한다.
-결국엔 비동기 통신을 쉽게하긴 하지만 반복되는 브라우저URL을 길게 작성하고 query param들을 가독성이 좋지않게 넣어놓기 떄문에 이를 변경하기 위해 axios를 사용했다.
-axios라이브러리를 사용하므로써 코드직관성이 올라갔으며, 모든 브라우저에서 작동하도록 지원하며 IE도 11버전까지 지원하기에 이에 대한 비동기 통신을 좀 더 오류없이 사용할 수 있게 되었다.
+# Code Refactoring (코드 퀄리티를 높이기 위한 시도)
 
-2.fetch에서 async로 변경할때 사용점, async에서 axios로 사용할때 가독성에 대한 내용을 적을것.
+## 비동기 통신 fetch API => axios로 변경
+
+- 뛰어난 브라우저 호환성
+
+| Fetch API  |   axios   |
+| :--------: | :-------: |
+| 호환 그림1 | 호환그림2 |
+
+- json 변환 과정 불필요
+
+response 객체에서 data를 쉽게 사용하려면 fetch에선 json으로 변환하는 과정이 필요하다. 매번 데이터를 받아와 반복적으로 json으로 변환하는 과정이 일어나 최소화하는 방법을 찾던 중 axios에선 변환과정이 불필요하단것을 알게되었다.
+
+- 코드 가독성
+
+```js
+
+//fetch
+async mostPopular() {
+    const response = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?key=[YOUR_API_KEY]&part=snippet&part=statistics&chart=mostPopular&maxResults=25&regionCode=KR`, this.getRequestOptions);
+    return await response.json();
+}
+
+
+//axios
+async mostPopular() {
+    const response = await this.youtube.get('videos', {
+        params: {
+            part: ['snippet', 'statistics'],
+            chart: 'mostPopular',
+            maxResults: 25,
+            regionCode: 'KR',
+        },
+        //array bracket remove
+        paramsSerializer: params => {
+            return qs.stringify(params, { arrayFormat: 'repeat' });
+        }
+    })
+    return response.data.items;
+}
+```
+
+같은 mostPopular()를 작성하였을때 코드 가독성이다. 어느것이 더 직관성이 좋은 것 같은가?
+
+fetch()는 인자값에 URL을 String으로 작성하여 baseURL과 param의 값이 한눈에 들어오지 않지만,axios 라이브러리를 이용할 경우 params option을 이용하여 작성하니 한눈에 알아볼 수 있게 직관성과 가독성이 좋은 코드를 작성할 수 있었다.
+
+<!-- 2.fetch에서 async로 변경할때 사용점, async에서 axios로 사용할때 가독성에 대한 내용을 적을것.
 ex) fetch에서는 .then()의 꼬리에 꼬리를 무는 callback지옥이 펼쳐졌다면, async에선 await를 사용한다는점으로 가독성이 높아졋고,
 axios에서는 httpClient주소가 길게 늘어져서 가독성이 안좋았는데 axios 인스턴스를 생성해 baseURL과 param들을 오브젝트 형식으로 기술하여
-좀 더 가독성을 높임. 
+좀 더 가독성을 높임. -->
 
+<!-- 코드수정부분 작성 -->
 
+### **21.07.28 axios로 변경 후 URL 호출 이슈**
 
-
-21.07.28 axios로 변경 후 APIs 호출 시 중복 파라미터 key값에 대한 삽질결과
 ---
 
-fetch()에서 전체 URL을 적어서 보내던 방식에서 axios를 이용해서 axios.create()와 get() function를 사용해서 객체를 넘겨주는 형식으로 바꿧다.
-그런데 거기서 문제가 발생한것은 mostPopular()에서 주소를 넘겨줄때 param의 key중에 part가 2번 호출된다는 점이었다. fetch로 넘길경우 일일히 다 적었기 떄문에 part=blabla&part=blabla2로 적으면 됐지만  axios의 params{}에 넘길경우에는 
-            params: {
-                part: 'snippet',
-                part: 'statistics',                
-            },
-로 적을 경우  Duplicate key 에러가 발생하여 작동되지 않았다. 구글링한 결과 []에 담아 객체를 보내면 된다기에 손쉽게 끝날 줄 알았는데 여기서부터 긴 삽질이 시작됐다. array에 담아 넘길경우
-URL에 parameter가 part[]=snippet&part[]=statistics 로 표현되어 youtube APIs의 request의 status는 200 OK가 뜨지만 올바른 형식으로 호출을 한게 아니라 받아온 data의 값은 아무것도 없어
-제대로된 data를 출력할 수 없었다. 
+fetch()에서 전체 URL을 적어서 보내던 방식에서 axios를 이용해서 axios.create()를 통해 baseURL와 option을 설정하고, get() method를 사용해서 params option을 이용해 값을 return해 오는 코드로 변경하였다.
 
-여러가지를 검색 후 해결에 도움이 된 페이지는 stackOverflow에 아래 링크의 글이었다.
+fetch로 작성했을때완 다른 이슈가 발생했는데 바로 **Duplicate key error**.
 
-https://stackoverflow.com/questions/49944387/how-to-correctly-use-axios-params-with-arrays
+youtube APIs URL을 호출할 때, part라는 param의 key를 value가 다르게 2번 호출하는데, 이를 아래와 같이 호출할 경우 **Duplicate key error**로 인해 올바른 호출을 수행할 수 없었다.
 
-문제는 나는 []를 없애야 되는데 paramsSerializer를 사용하라는데 return 부분에 qs의 변수가 선언되지 않았는데 return을 주어 잘 이해가 되질 않았다. 라이브러리를 별도로 import해서 사용하는것에 아직 익숙치 않아서 발생한 문제인데, 너무 당연히 import해서 사용하는거라 qs에 대한 import처리부분을 설명해주는곳을 찾을 수 없어 1시간넘게 이부분에서 해맸다.
+```js
+params: {
+    part: 'snippet',
+    part: 'statistics',
+ },
+```
 
-그러던 도중 기초적인 qs가 어떤건지도 모르는체 코드를 복사 붙여넣기로 따라하는것 같아 qs를 검색 후 찾아 낸곳이 아래 링크의 홈페이지였다.
+생각해보면 key를 중복작성한게 error 나는게 당연하다고 생각해 이번에는 array로 변경해서 넘겼다.하지만 이는 또 다른 이슈를 불러왔다..
 
-https://www.npmjs.com/package/qs
+```js
+    //input params
+    params: {
+        part: ['snippet','statistics'],
+    },
 
-qs라이브러리로써 문자열에 대한 function를 제공하는 라이브러리였다. 물론 지금 여러가지를 더 찾아보니 function 직접 구현해서 해당URL을 바꿀 수 있었지만 나는 라이브러리를 쓰는것을 택했다.
+    //output URL param
+    part%5B0%5D=snippet&part%5B1%5D=statistics
 
-yarn을 이용해 
+    //expected output URL param
+    part=snippet&part=statistics
+```
 
-(코드블럭 넣기)
-yarn add qs 를 통해 
+처음에는 HTTP 통신 status가 200OK가 떠서 query string이 잘못된지 몰랐지만, 안에 data가 올바르게 들어있지 않은걸보고 역추적하다가 query string이 youtube API가 읽지 못하는 문법으로 request 되고있는것을 발견했다. Array에 넣고 중복키 이슈를 없애면 손쉽게 끝날 줄 알았는데 여기서부터 무지에 의한 삽질이 시작되었다.
 
-dependencies에 추가하고 사용하려는 해당 js에 import하여 사용 준비를 마쳤고,
-axios conifg 항목 중 직렬화를 위해 paramsSerializer 항목에 qs를 이용한 function에 qs의 stringify()를 이용했다. 근데 문제는 해당 URL에
+여러가지를 검색 후 해결에 도움이 된 곳은 [stackOverflow](https://stackoverflow.com/questions/49944387/how-to-correctly-use-axios-params-with-arrays) 글이었다.
 
-part%5B0%5D=snippet&part%5B1%5D=statistics
+위 글을 보고 axios 문서를 읽어보니 paramsSerializer option을 사용하여 직렬화하는 방법에 대해 알게되었다.
 
-%5B0, %5B1등의 문자가 섞여 나오는것이었다 ㅠㅠㅠ
+```js
+  // `paramsSerializer` is an optional function in charge of serializing `params`
+  // (e.g. https://www.npmjs.com/package/qs, http://api.jquery.com/jquery.param/)
+  paramsSerializer: function (params) {
+    return Qs.stringify(params, {arrayFormat: 'brackets'})
+  },
+```
 
-찾아보니 array braket을 URL 인코딩하여 위 형식으로 표기됐단것을 발견했고, 그것에 대한 해결법으로
+여기서 한번 더 깨달은게 있다. **코드를 단순히 복붙하지말고 제대로 읽어보고 활용하자.**
 
-qs의 stringify 옵션을 'repeat'으로 주어 []을 없이 만드는것으로 해결했다.
+> 코드를 붙여넣기만하고 사용법을 파악하지않고 왜 안되지? 라는 생각만했다.
 
-qs 사용법 : https://www.npmjs.com/package/qs  arrayFormat 검색
-https://axios-http.com/docs/req_config 
+~~주석만 읽어도 qs문서를 보고 option을 적용하면 되는것을 콘솔창만 보여 왜 안될까 생각하며 1시간이나 헤멨다.~~
+
+위 paramsSerializer option을 사용하고 URL을 보는데 `%5B0%5D`같은 특수문자가 뭔지 궁금해져서 검색해봤다. 검색결과 URL 인코딩하여 특수문자로 표기됐단것을 알게되었다.
+
+```
+   //output URL param
+    part%5B0%5D=snippet&part%5B1%5D=statistics
+
+    //expected output URL param
+    part=snippet&part=statistics
+```
+
+| URL encoding | URL decoding | decoding param value |
+| :----------: | :----------: | :------------------: |
+|     %5B      |      [       |   part[0]=snippet    |
+|     %5D      |      ]       |  part[1]=statistics  |
+
+그것에 대한 해결법으로 [qs](https://www.npmjs.com/package/qs)의 문서를 보고 **stringify 옵션을 'repeat'** 으로 주어 []을 없이 만드는것으로 해결했다.
+
+```
+    //qs stringify arrayFormat option
+
+     qs.stringify({ a: ['b', 'c'] }, { arrayFormat: 'repeat' })
+    // 'a=b&a=c'
 
 
-별거아닌 일이었지만 이런부분이 미흡한 나에게 필요한 라이브러리를 추가하고 import해서 사용하는방법을 익힌 좋은 시간이었다. 또한 요청 URL을 비교하여 param값이 틀린경우 이에대해 대처하는 방법을 배운것 같다. 
+    qs.stringify({ a: ['b', 'c'] }, { arrayFormat: 'indices' })
+    // 'a[0]=b&a[1]=c'
 
+    qs.stringify({ a: ['b', 'c'] }, { arrayFormat: 'brackets' })
+    // 'a[]=b&a[]=c'
 
+    qs.stringify({ a: ['b', 'c'] }, { arrayFormat: 'comma' })
+    // 'a=b,c'
+```
 
-라이브러리를 쓴다는건 의존하는 라이브러리가 생긴다는것이기 때문에 신중하게 고려해서 사용하고, 이 라이브러리의 사용용도에 대해 알아놀을 필요가 있음.
+해결법을 찾고나니 별거 아니었지만 늘 코딩을 할 때 드는 생각이있다.
+
+> 단순히 복붙해서 해결할 생각을 하지말고, 에러부분을 정확히 파악해서 정확한 솔루션을 내리자. 이게 시간을 덜 쓰는 길이다.
+
+처음쓰는 라이브러리라 당황했지만 결국에는 사용법은 같고, 문서를 보고 적절하게 쓴다면 빠르고 정확하게 에러를 해결할 수 있을것 같다.
+
+---
+
 <!-- 웹팩에 대해서도 알아볼것. -->
 
-
-
-
-참조자료 
+<!-- 참조자료
 엑시오스 브라우저 호환성: https://github.com/axios/axios
-async 브라우저 호환성 : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function 
+async 브라우저 호환성 : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function -->
