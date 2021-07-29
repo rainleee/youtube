@@ -10,9 +10,9 @@
 
 - 뛰어난 브라우저 호환성
 
-| Fetch API  |   axios   |
-| :--------: | :-------: |
-| <img src="https://user-images.githubusercontent.com/50471668/127454334-b41eda40-3eaf-4f21-a4b0-9a41eb73530c.png" width="600" alt="Fetch API 브라우저 호환성"> | <img src="https://user-images.githubusercontent.com/50471668/127454355-7f8f2bf2-3dcb-41e1-b8fe-26bbd4b1ad40.png" width="600" alt="axops 브라우저 호환성">|
+|                                                                                                                               Fetch API                                                                                                                               |                                                                                                axios                                                                                                 |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://user-images.githubusercontent.com/50471668/127454334-b41eda40-3eaf-4f21-a4b0-9a41eb73530c.png" width="600" alt="Fetch API 브라우저 호환성"> [참조링크](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) | <img src="https://user-images.githubusercontent.com/50471668/127454355-7f8f2bf2-3dcb-41e1-b8fe-26bbd4b1ad40.png" width="600" alt="axops 브라우저 호환성"> [참조링크](https://github.com/axios/axios) |
 
 - json 변환 과정 불필요
 
@@ -55,8 +55,6 @@ fetch()는 인자값에 URL을 String으로 작성하여 baseURL과 param의 값
 ex) fetch에서는 .then()의 꼬리에 꼬리를 무는 callback지옥이 펼쳐졌다면, async에선 await를 사용한다는점으로 가독성이 높아졋고,
 axios에서는 httpClient주소가 길게 늘어져서 가독성이 안좋았는데 axios 인스턴스를 생성해 baseURL과 param들을 오브젝트 형식으로 기술하여
 좀 더 가독성을 높임. -->
-
-<!-- 코드수정부분 작성 -->
 
 ### **21.07.28 axios로 변경 후 URL 호출 이슈**
 
@@ -153,7 +151,3 @@ params: {
 ---
 
 <!-- 웹팩에 대해서도 알아볼것. -->
-
-<!-- 참조자료
-엑시오스 브라우저 호환성: https://github.com/axios/axios
-async 브라우저 호환성 : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function -->
