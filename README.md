@@ -12,7 +12,7 @@
 
 | Fetch API  |   axios   |
 | :--------: | :-------: |
-| 호환 그림1 | 호환그림2 |
+| <img src="https://user-images.githubusercontent.com/50471668/127454334-b41eda40-3eaf-4f21-a4b0-9a41eb73530c.png" width="600" alt="Fetch API 브라우저 호환성"> | <img src="https://user-images.githubusercontent.com/50471668/127454355-7f8f2bf2-3dcb-41e1-b8fe-26bbd4b1ad40.png" width="600" alt="axops 브라우저 호환성">|
 
 - json 변환 과정 불필요
 
