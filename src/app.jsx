@@ -80,7 +80,7 @@ export default App;
 */
 
 /*
-  오늘 할 일
+  TODO 21.08.04
   1. fetch 통신을 하는 컴포넌트가 겹쳐져있기 때문에 그부분을 별도로 구성한다.
   2.TODO List 익스텐션 깔기
 */
