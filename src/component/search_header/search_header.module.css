@@ -1,47 +1,86 @@
+/* 해야할 일
+  *html body font-size 및 font 패밀리 지정 -- 아직 처리안함
+  *픽셀대신 rem,em을 사용해서 만든다.
+  *css text color 변수명 지정
+  *pc에 맞는 형태를 먼저짜고, 반응형 페이지를 제작한다.
+  *js 이벤트를 할때는 display:none;이 flex, block등으로 보이게 만들기  
+*/
+
+:root {
+  --text-color: #030303;
+  --background-color: gray;
+  --logo-font-style: "Oswald", sans-serif;
+  --information-profile-color: #b4004e;
+  --information-notice-color: #606060;
+  --search-bar-both-sides-margin: 1.875rem;
+}
+
 .header {
-  /* background-color: black; */
+  display: inline-flex;
+  position: relative;
+  width: 100%;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 95%;
   height: 4rem;
-  padding: 0.5em 1em;
-  /* background-color: black; */
-  color: whitesmoke;
+  margin: 0 var(--search-bar-both-sides-margin);
+  color: var(--background-color);
+}
+
+.menu {
+  display: flex;
+  position: relative;
+  top: 1.25rem;
+  left: 1rem;
+}
+
+.menubar {
+  display: flex;
+  font-size: 1.5rem;
 }
 
 .logo {
   display: flex;
+  justify-self: self-left;
   align-items: center;
-  /* margin-right: 1em; */
   cursor: pointer;
   color: black;
+  padding-bottom: 0.5rem;
+  margin-left: 1rem;
 }
 
 .logo:hover {
   transform: scale(1.02);
 }
 
-.img {
-  height: 2rem;
+.logoImg {
+  width: 3rem;
+  height: 1.7rem;
+  margin-top: 0.4rem;
   padding-right: 0.5rem;
 }
 
 .title {
+  /* font-family: var(--logo-font-style); */
+  letter-spacing: -0.281rem;
   padding-right: 0.5rem;
+  margin: 0;
 }
 
 .search {
-  width: 31.25em;
+  width: 43.75em;
+  /* width: 31.25em; */
   display: flex;
-  align-items: center;
+  justify-content: center;
+  /* margin-left: 100px; */
 }
 
 .input {
-  width: 70%;
-  flex-basis: 100%;
+  width: 100%;
   padding: 0.2rem 1rem;
   font-size: 1.2rem;
   /* outline: 0; */
@@ -54,9 +93,22 @@
   font-size: 1.3rem;
 }
 
-.user {
-  font-size: 2rem;
-  color: black;
+.information {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.profile {
+  margin-left: var(--search-bar-both-sides-margin);
+  font-size: 2.3rem;
+  color: var(--information-profile-color);
+}
+
+.notice {
+  margin-left: var(--search-bar-both-sides-margin);
+  font-size: 1.5rem;
+  color: var(--information-notice-color);
 }
 
 @media screen and (max-width: 48rem) {
@@ -64,7 +116,7 @@
     font-size: 1.5rem;
   }
 
-  .img {
+  .logoImg {
     width: 2.5rem;
     height: 1.5rem;
   }
