@@ -29,7 +29,7 @@ const SearchHeader = memo(({ onSearchVideo, onMainPage }) => {
   return (
     <header className={styles.header}>
       <div className={styles.menu}>
-        <i class={`fas fa-bars ${styles.menubar}`}></i>
+        <i className={`fas fa-bars ${styles.menubar}`}></i>
       </div>
       <div className={styles.container}>
         <div className={styles.logo} onClick={onClickMainPage}>
@@ -53,7 +53,7 @@ const SearchHeader = memo(({ onSearchVideo, onMainPage }) => {
           </button>
         </div>
         <div className={styles.information}>
-          <i class={`fas fa-bell ${styles.notice}`}></i>
+          <i className={`fas fa-bell ${styles.notice}`}></i>
           <i className={`fas fa-user-circle ${styles.profile}`}></i>
         </div>
       </div>

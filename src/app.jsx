@@ -1,27 +1,29 @@
-import { useCallback, useEffect, useState } from 'react';
-import styles from './app.module.css';
-import SearchHeader from './component/search_header/search_header';
-import VideoDetail from './component/video_detail/video_detail';
-import VideoList from './component/video_list/video_list';
+import { useCallback, useEffect, useState } from "react";
+import styles from "./app.module.css";
+import SearchHeader from "./component/search_header/search_header";
+import VideoDetail from "./component/video_detail/video_detail";
+import VideoList from "./component/video_list/video_list";
 
 function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [selectVideo, setSelectVideo] = useState(null);
   const [subcribCount, setSubcribCount] = useState(0);
 
-  //init or update 
+  //init or update
   useEffect(() => {
-    youtube.mostPopular()
+    youtube
+      .mostPopular()
       .then(resultItems => setVideos(resultItems))
-      .catch(error => console.log('error', error));
+      .catch(error => console.log("error", error));
   }, [youtube]);
 
   //logo click
   const handleMainPage = useCallback(async () => {
     setSelectVideo(null);
 
-    const result = await youtube.mostPopular()
-      .catch(error => console.log('error', error));
+    const result = await youtube
+      .mostPopular()
+      .catch(error => console.log("error", error));
 
     setVideos(result);
   }, [youtube]);
@@ -30,33 +32,45 @@ function App({ youtube }) {
   const handleVideoDetail = async video => {
     setSelectVideo(video);
 
-    const subscriberCount = await youtube.subscriberCount(video.snippet.channelId)
-      .catch(error => console.log('error', error));
+    const subscriberCount = await youtube
+      .subscriberCount(video.snippet.channelId)
+      .catch(error => console.log("error", error));
     setSubcribCount(subscriberCount);
-  }
+  };
 
   //search videos
-  const handleSearhVideos = useCallback(async query => {
-    setVideos(
-      await youtube.searchVideo(query)
-        .catch(error => console.log('error', error))
-    );
+  const handleSearhVideos = useCallback(
+    async query => {
+      setVideos(
+        await youtube
+          .searchVideo(query)
+          .catch(error => console.log("error", error))
+      );
 
-    setSelectVideo(null);
-  }, [youtube]);
+      setSelectVideo(null);
+    },
+    [youtube]
+  );
 
   return (
     <div className={styles.app}>
       {/* <SearchHeader onSearchVideo={handleSearhVideos} /> */}
-      <SearchHeader onSearchVideo={handleSearhVideos} onMainPage={handleMainPage} />
+      <SearchHeader
+        onSearchVideo={handleSearhVideos}
+        onMainPage={handleMainPage}
+      />
       <section className={styles.content}>
-        {selectVideo &&
+        {selectVideo && (
           <div className={styles.detail}>
             <VideoDetail video={selectVideo} subcribCount={subcribCount} />
           </div>
-        }
+        )}
         <div className={styles.list}>
-          <VideoList videos={videos} onClickVideo={handleVideoDetail} display={selectVideo ? 'list' : 'grid'} />
+          <VideoList
+            videos={videos}
+            onClickVideo={handleVideoDetail}
+            display={selectVideo ? "videoPlayer" : "grid"}
+          />
         </div>
       </section>
     </div>

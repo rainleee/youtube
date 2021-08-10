@@ -6,7 +6,7 @@
 :root {
   --text-color: #030303;
   --background-color: gray;
-  /* --logo-font-style: "Oswald", sans-serif; */
+  --logo-font-style: "Oswald", sans-serif;
   --information-profile-color: #b4004e;
   --information-notice-color: #606060;
   --search-bar-color: #a8a7a7;
@@ -63,10 +63,11 @@
 }
 
 .title {
-  /* font-family: var(--logo-font-style); */
+  font-family: var(--logo-font-style);
   letter-spacing: -0.281rem;
   padding-right: 0.5rem;
   margin: 0;
+  font-size: 2rem;
 }
 
 .search {
