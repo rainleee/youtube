@@ -1,7 +1,4 @@
 /* 해야할 일
-  *html body font-size 및 font 패밀리 지정 -- 아직 처리안함
-  *픽셀대신 rem,em을 사용해서 만든다.
-  *css text color 변수명 지정
   *pc에 맞는 형태를 먼저짜고, 반응형 페이지를 제작한다.
   *js 이벤트를 할때는 display:none;이 flex, block등으로 보이게 만들기  
 */
@@ -9,9 +6,10 @@
 :root {
   --text-color: #030303;
   --background-color: gray;
-  --logo-font-style: "Oswald", sans-serif;
+  /* --logo-font-style: "Oswald", sans-serif; */
   --information-profile-color: #b4004e;
   --information-notice-color: #606060;
+  --search-bar-color: #a8a7a7;
   --search-bar-both-sides-margin: 1.875rem;
 }
 
@@ -73,24 +71,35 @@
 
 .search {
   width: 43.75em;
-  /* width: 31.25em; */
   display: flex;
   justify-content: center;
-  /* margin-left: 100px; */
 }
 
 .input {
-  width: 100%;
+  width: 92%;
   padding: 0.2rem 1rem;
   font-size: 1.2rem;
-  /* outline: 0; */
-  outline-color: gray;
+  outline: 1;
+  outline-color: #78909c;
+  border: 0.0625rem solid var(--search-bar-color);
 }
 
 .button {
-  padding: 0.1rem 1rem;
+  width: 8%;
+  color: #fafafa;
   margin: 0;
-  font-size: 1.3rem;
+  border: 0.0625rem solid var(--search-bar-color);
+  border-left: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: black;
+  background-color: #e0e0e0;
+}
+
+.searchBtn {
+  color: #9e9e9e;
 }
 
 .information {
