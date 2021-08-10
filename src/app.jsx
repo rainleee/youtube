@@ -8,6 +8,7 @@ function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [selectVideo, setSelectVideo] = useState(null);
   const [subcribCount, setSubcribCount] = useState(0);
+  const [popularTitle, setPopularTitle] = useState(null);
 
   //init or update
   useEffect(() => {
@@ -20,6 +21,7 @@ function App({ youtube }) {
   //logo click
   const handleMainPage = useCallback(async () => {
     setSelectVideo(null);
+    setPopularTitle(null);
 
     const result = await youtube
       .mostPopular()
@@ -31,6 +33,7 @@ function App({ youtube }) {
   //go to video Player
   const handleVideoDetail = async video => {
     setSelectVideo(video);
+    setPopularTitle("no");
 
     const subscriberCount = await youtube
       .subscriberCount(video.snippet.channelId)
@@ -48,6 +51,7 @@ function App({ youtube }) {
       );
 
       setSelectVideo(null);
+      setPopularTitle("no");
     },
     [youtube]
   );
@@ -69,7 +73,7 @@ function App({ youtube }) {
           <VideoList
             videos={videos}
             onClickVideo={handleVideoDetail}
-            display={selectVideo ? "videoPlayer" : "grid"}
+            display={popularTitle}
           />
         </div>
       </section>
@@ -97,4 +101,10 @@ export default App;
   TODO 21.08.04
   1. fetch 통신을 하는 컴포넌트가 겹쳐져있기 때문에 그부분을 별도로 구성한다.
   2.TODO List 익스텐션 깔기
+
+  TODO 21.08.10
+  1.인기 급상승 동영상 useStatus를 이용해서 하는법 다시 고민하기
+  2.검색했을때 검색창 사이 간격이 줄어드는 이슈 고치기
+  3.메인에서 아래쪽 영상을 클릭했을떄 영상이 먼저안보이고 아래쪽만 보이는것 고치기
+  4.상세화면에서 아이프레임과 옆에목록 픽셀 어긋난거 고치기
 */

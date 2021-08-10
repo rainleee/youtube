@@ -121,7 +121,7 @@
   color: var(--information-notice-color);
 }
 
-@media screen and (max-width: 48rem) {
+/* @media screen and (max-width: 48rem) {
   .title {
     font-size: 1.5rem;
   }
@@ -139,4 +139,4 @@
     flex-flow: row-reverse;
     width: 40%;
   }
-}
+} */

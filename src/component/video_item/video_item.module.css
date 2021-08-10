@@ -11,20 +11,7 @@ h6 {
 .container {
   display: grid;
   list-style: none;
-  grid-template-columns: repeat(1, 1fr);
 }
-/* .container {
-  padding: 0.2em;
-  list-style: none;
-} */
-
-/* .container.grid {
-    width: 50%;
-} */
-
-/* .container.list {
-  width: 100%;
-} */
 
 .video {
   width: 100%;
@@ -41,6 +28,23 @@ h6 {
 
 .thumbnails {
   width: 100%;
+  margin-right: 0.3125rem;
+}
+
+.container.flex {
+  display: flex;
+  margin-bottom: 0.3125rem;
+  cursor: pointer;
+  transition: transform 250ms ease-in;
+}
+
+.container.flex > .video {
+  display: flex;
+  align-items: center;
+}
+
+.container.flex > .video > .thumbnails {
+  width: 57%;
 }
 
 .channel {
@@ -50,4 +54,15 @@ h6 {
 
 .channel:hover {
   color: #494949;
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: 1.2em;
+  height: 3.6em;
 }

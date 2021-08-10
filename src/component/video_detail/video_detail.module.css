@@ -1,8 +1,8 @@
-.detail{
-    padding: 0.2em;
+.detail {
+  padding: 0.2em;
 }
 
-.description{
-    white-space: pre-wrap;
-    /* white-space: pre-line; */
+.description {
+  white-space: pre-wrap;
+  /* white-space: pre-line; */
 }
