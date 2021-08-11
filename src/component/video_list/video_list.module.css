@@ -23,3 +23,9 @@ ul {
 .title > h1 {
   font-size: 1.5rem;
 }
+
+@media screen and (max-width: 1054px) {
+  .main {
+    margin: 0 7rem;
+  }
+}
