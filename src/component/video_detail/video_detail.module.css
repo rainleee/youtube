@@ -24,8 +24,8 @@
 }
 
 .uploadDate {
-  border-bottom: 1px solid #a8a7a7;
-  padding-bottom: 20px;
+  border-bottom: 0.0625rem solid #a8a7a7;
+  padding-bottom: 1.25rem;
 }
 
 .channelTitle {

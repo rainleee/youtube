@@ -24,7 +24,7 @@ ul {
   font-size: 1.5rem;
 }
 
-@media screen and (max-width: 1070px) {
+@media screen and (max-width: 66.875rem) {
   .main {
     display: grid;
     justify-content: center;

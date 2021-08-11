@@ -44,7 +44,20 @@ h6 {
 }
 
 .container.flex > .video > .thumbnails {
-  width: 57%;
+  width: 56%;
+}
+
+.container.search {
+  display: grid;
+  width: 100%;
+}
+
+.video.search {
+  display: flex;
+}
+
+.video.search > .thumbnails {
+  width: 18.75rem;
 }
 
 .channel {

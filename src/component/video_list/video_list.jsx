@@ -2,10 +2,8 @@ import React from "react";
 import VideoItem from "../video_item/video_item";
 import styles from "./video_list.module.css";
 
-const VideoList = ({ videos, onClickVideo, display }) => {
-  //   const displayType =
-  //     display === "videoPlayer" ? styles.videoPlayer : styles.grid;
-  const displayType = display !== null ? styles.videoPlayer : styles.grid;
+const VideoList = ({ videos, onClickVideo, display, searchKeyword }) => {
+  const displayType = display !== null ? styles.videoPlayer : "";
 
   return (
     <main className={styles.main}>
@@ -21,6 +19,7 @@ const VideoList = ({ videos, onClickVideo, display }) => {
             video={video}
             onClickVideo={onClickVideo}
             display={display}
+            searchKeyword={searchKeyword}
           />
         ))}
       </ul>

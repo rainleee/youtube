@@ -8,7 +8,7 @@ function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [selectVideo, setSelectVideo] = useState(null);
   const [subcribCount, setSubcribCount] = useState(0);
-  const [popularTitle, setPopularTitle] = useState(null);
+  const [display, setDisplay] = useState(null);
 
   //init or update
   useEffect(() => {
@@ -20,8 +20,8 @@ function App({ youtube }) {
 
   //logo click
   const handleMainPage = useCallback(async () => {
+    setDisplay(null);
     setSelectVideo(null);
-    setPopularTitle(null);
 
     const result = await youtube
       .mostPopular()
@@ -34,7 +34,7 @@ function App({ youtube }) {
   const handleVideoDetail = async video => {
     window.scrollTo(0, 0);
     setSelectVideo(video);
-    setPopularTitle("no");
+    setDisplay("detail");
 
     const subscriberCount = await youtube
       .subscriberCount(video.snippet.channelId)
@@ -52,7 +52,7 @@ function App({ youtube }) {
       );
 
       setSelectVideo(null);
-      setPopularTitle("no");
+      setDisplay("search");
     },
     [youtube]
   );
@@ -75,7 +75,8 @@ function App({ youtube }) {
           <VideoList
             videos={videos}
             onClickVideo={handleVideoDetail}
-            display={popularTitle}
+            display={display}
+            searchKeyword={display}
           />
         </div>
       </section>
@@ -112,5 +113,5 @@ export default App;
   
   TODO 21.08.10
   1.detail 클릭시 창위치 맨위로 위치하게 하기 (완료)
-  2.
+  2.search_header 검색할때 계속 위치가 가변적으로 변하는 현상 고치기
 */

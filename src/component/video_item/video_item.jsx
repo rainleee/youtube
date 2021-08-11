@@ -2,14 +2,9 @@ import React, { memo } from "react";
 import styles from "./video_item.module.css";
 
 const VideoItem = memo(
-  ({ video, video: { snippet }, onClickVideo, display }) => {
-    // const displayType =
-    //   display === "videoPlayer" ? styles.videoPlayer : styles.grid;
-
-    const displayType = display !== null ? styles.flex : styles.grid;
-
-    console.log("displayType");
-    console.log(displayType);
+  ({ video, video: { snippet }, onClickVideo, display, searchKeyword }) => {
+    const displayType = display === "detail" ? styles.flex : "";
+    const searchDisplay = searchKeyword === "search" ? styles.search : "";
 
     //Detail event
     const onClickVideoBox = () => {
@@ -18,10 +13,10 @@ const VideoItem = memo(
 
     return (
       <li
-        className={`${styles.container} ${displayType}`}
+        className={`${styles.container} ${displayType} ${searchDisplay}`}
         onClick={onClickVideoBox}
       >
-        <div className={styles.video}>
+        <div className={`${styles.video} ${searchDisplay}`}>
           <img
             className={styles.thumbnails}
             src={snippet.thumbnails.medium.url}
