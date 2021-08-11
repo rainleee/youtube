@@ -1,6 +1,7 @@
 body {
   font-family: "Noto Sans KR", sans-serif;
 }
+
 .app {
   max-width: 80rem;
 }
@@ -17,19 +18,8 @@ body {
   flex: 1 1 30%;
 }
 
-/* @media screen and (max-width: 48rem) {
-  body {
-    background-color: red;
-  }
-
-  ul {
-    display: flexbox;
-    flex-flow: column wrap;
-    background-color: beige;
-    width: 100vw;
-  }
-  li {
-    width: 100vw;
-    background-color: green;
-  }
-} */
+.nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}

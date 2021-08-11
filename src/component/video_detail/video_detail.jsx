@@ -22,15 +22,16 @@ const VideoDetail = ({
         ></iframe>
       </div>
       <h2 className={styles.title}>{snippet.title}</h2>
-      {/* <h2>조회수 {viewCount}회</h2> */}
       <h3 className={styles.uploadDate}>{date.toLocaleDateString()}</h3>
-      {/* <h2>좋아요 {statistics.likeCount}</h2>
-            <h2>싫어요 {statistics.dislikeCount}</h2> */}
       <h3 className={styles.channelTitle}>채널명 : {snippet.channelTitle}</h3>
       <h4 className={styles.subcribCount}>
         구독자 {parseInt(subcribCount).toLocaleString("ko-KR")}명
       </h4>
       <pre className={styles.description}>{snippet.description}</pre>
+      {/*   search API 호출 시 해당 데이터를 불러올 수 없어 보류  
+        <h2>좋아요 {statistics.likeCount}</h2>
+            <h2>싫어요 {statistics.dislikeCount}</h2> */}
+      {/* <h2>조회수 {viewCount}회</h2> */}
       {/* <h2>tags : {snippet.tags.map(tag => <span>#{tag} </span>)}</h2> */}
     </section>
   );

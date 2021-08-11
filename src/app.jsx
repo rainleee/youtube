@@ -32,6 +32,7 @@ function App({ youtube }) {
 
   //go to video Player
   const handleVideoDetail = async video => {
+    window.scrollTo(0, 0);
     setSelectVideo(video);
     setPopularTitle("no");
 
@@ -58,11 +59,12 @@ function App({ youtube }) {
 
   return (
     <div className={styles.app}>
-      {/* <SearchHeader onSearchVideo={handleSearhVideos} /> */}
-      <SearchHeader
-        onSearchVideo={handleSearhVideos}
-        onMainPage={handleMainPage}
-      />
+      <div className={styles.nav}>
+        <SearchHeader
+          onSearchVideo={handleSearhVideos}
+          onMainPage={handleMainPage}
+        />
+      </div>
       <section className={styles.content}>
         {selectVideo && (
           <div className={styles.detail}>
@@ -107,4 +109,8 @@ export default App;
   2.검색했을때 검색창 사이 간격이 줄어드는 이슈 고치기
   3.메인에서 아래쪽 영상을 클릭했을떄 영상이 먼저안보이고 아래쪽만 보이는것 고치기
   4.상세화면에서 아이프레임과 옆에목록 픽셀 어긋난거 고치기
+  
+  TODO 21.08.10
+  1.detail 클릭시 창위치 맨위로 위치하게 하기 (완료)
+  2.
 */

@@ -7,9 +7,6 @@ const VideoList = ({ videos, onClickVideo, display }) => {
   //     display === "videoPlayer" ? styles.videoPlayer : styles.grid;
   const displayType = display !== null ? styles.videoPlayer : styles.grid;
 
-  console.log("display");
-  console.log(display);
-
   return (
     <main className={styles.main}>
       {!display && (
