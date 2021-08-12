@@ -15,8 +15,3 @@ code {
 * {
   box-sizing: border-box;
 }
-
-#root {
-  display: grid;
-  justify-items: center;
-}

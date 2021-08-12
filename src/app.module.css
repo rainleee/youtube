@@ -2,12 +2,10 @@ body {
   font-family: "Noto Sans KR", sans-serif;
 }
 
-.app {
-  max-width: 80rem;
-}
-
 .content {
+  /* max-width: 80rem; */
   display: flex;
+  justify-content: center;
 }
 
 .detail {
@@ -16,10 +14,4 @@ body {
 
 .list {
   flex: 1 1 30%;
-}
-
-.nav {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
 }

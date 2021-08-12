@@ -29,16 +29,16 @@ const SearchHeader = memo(({ onSearchVideo, onMainPage }) => {
   return (
     <header className={styles.header}>
       <div className={styles.menu}>
-        <i className={`fas fa-bars ${styles.menubar}`}></i>
+        <i className='fas fa-bars'></i>
       </div>
       <div className={styles.container}>
         <div className={styles.logo} onClick={onClickMainPage}>
-          <img className={styles.logoImg} src="/images/logo.png" alt="logo" />
+          <img className={styles.logo__img} src="/images/logo.png" alt="logo" />
           <h1 className={styles.title}>YouTube</h1>
         </div>
         <div className={styles.search}>
           <input
-            className={styles.input}
+            className={styles.search__query}
             type="text"
             placeholder="검색"
             ref={searchInput}
@@ -49,10 +49,10 @@ const SearchHeader = memo(({ onSearchVideo, onMainPage }) => {
             type="submit"
             onClick={onClickSearch}
           >
-            <i className={`fas fa-search ${styles.searchBtn}`}></i>
+            <i className='fas fa-search'></i>
           </button>
         </div>
-        <div className={styles.information}>
+        <div className={styles.privacy__info}>
           <i className={`fas fa-bell ${styles.notice}`}></i>
           <i className={`fas fa-user-circle ${styles.profile}`}></i>
         </div>
