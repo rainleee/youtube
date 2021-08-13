@@ -1,5 +1,27 @@
-.thumbnails {
+.item__flex {
+  display: flex;
+  align-items: flex-start;
+}
+.item__flex:not(:nth-child(-n + 10)) {
+  display: none;
+}
+
+.item__flex > .thumbnails__box {
+  width: 12.5rem;
+}
+
+.item__flex > .thumbnails__box > .thumbnails {
   width: 100%;
+}
+
+.item__flex > .metadata {
+  width: 14.375rem;
+  margin: 0 0.5rem;
+  font-size: 0.9375rem;
+}
+
+.item__flex > .metadata > .title {
+  margin: 0 0 0.6rem 0;
 }
 
 .metadata .title {

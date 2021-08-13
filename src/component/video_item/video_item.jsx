@@ -2,9 +2,8 @@ import React, { memo } from "react";
 import styles from "./video_item.module.css";
 
 const VideoItem = memo(
-  ({ video, video: { snippet }, onClickVideo, display, searchKeyword }) => {
-    const displayType = display === "detail" ? styles.flex : "";
-    const searchDisplay = searchKeyword === "search" ? styles.search : "";
+  ({ video, video: { snippet }, onClickVideo, display }) => {
+    const displayType = display ? styles.item__flex : "";
 
     //Detail event
     const onClickVideoBox = () => {
@@ -12,16 +11,14 @@ const VideoItem = memo(
     };
 
     return (
-      <li
-        className={`${styles.container} ${displayType} ${searchDisplay}`}
-        onClick={onClickVideoBox}
-      >
-        {/* <div className={`${styles.video} ${searchDisplay}`}> */}
-        <img
-          className={styles.thumbnails}
-          src={snippet.thumbnails.medium.url}
-          alt={snippet.title}
-        />
+      <li className={displayType} onClick={onClickVideoBox}>
+        <div className={styles.thumbnails__box}>
+          <img
+            className={styles.thumbnails}
+            src={snippet.thumbnails.medium.url}
+            alt={snippet.title}
+          />
+        </div>
         <div className={styles.metadata}>
           <h1 className={styles.title}>{snippet.title}</h1>
           <p className={styles.channel}>{snippet.channelTitle}</p>

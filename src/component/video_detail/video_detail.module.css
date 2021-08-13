@@ -6,7 +6,9 @@
 .iframebox {
   position: relative;
   margin-bottom: 1.875rem;
-  padding-bottom: 56.25%; /* 16:9 비율*/
+  /* width: 1000px; */
+  padding-bottom: 56.25%;
+  /* 16:9 비율*/
 }
 
 .iframebox .videoPlayer {

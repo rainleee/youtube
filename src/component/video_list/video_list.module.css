@@ -1,11 +1,19 @@
 .videos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  margin: 0 5.5rem;
   gap: 2rem 1rem;
 }
 
 .videos:hover {
   cursor: pointer;
+}
+
+.videos.one__row__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0;
+  gap: 0.5rem;
 }
 
 /*

@@ -1,11 +1,14 @@
 .contents {
-  /* max-width: 80rem; */
   padding-top: 7rem;
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .video__list {
-  margin: 0 5.5rem;
   flex: 1;
+}
+
+.video__list.flex {
+  flex: initial;
 }

@@ -52,7 +52,7 @@ function App({ youtube }) {
       );
 
       setSelectVideo(null);
-      setDisplay("search");
+      setDisplay(query); //검색시 className을 추가한다.
     },
     [youtube]
   );
@@ -70,12 +70,15 @@ function App({ youtube }) {
               <VideoDetail video={selectVideo} subcribCount={subcribCount} />
             </article>
           )}
-          <article className={styles.video__list}>
+          <article
+            className={`${styles.video__list} ${display ? styles.flex : ""}`}
+          >
             <VideoList
               videos={videos}
               onClickVideo={handleVideoDetail}
-              display={display}
-              searchKeyword={display}
+              display={display ? "flex" : null}
+              // display={display}
+              // searchKeyword={display}
             />
           </article>
         </section>
@@ -113,4 +116,9 @@ export default App;
   
   TODO 21.08.13
   1.iframe 스크롤시 맨위에 영역 침범하는 문제 해결하기
+  
+  TODO 21.08.14
+  1.iframe 스크롤시 맨위에 영역 침범하는 문제 해결하기, 영상마다 크기가 다르게 되는것 해결하기
+  2.detail grid veiw와 검색시 grid view를 분리하기. (검색 시 grid view를 바꿀 것.)
+  3.detail 시 왼쪽 급상승 게시물을 25개 다 보여줄게 아니라 10개정도만 보여주고 scroll이벤트시 none => view하는 것으로 바꾸기
 */
