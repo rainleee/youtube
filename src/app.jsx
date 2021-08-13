@@ -58,27 +58,29 @@ function App({ youtube }) {
   );
 
   return (
-    <div className={styles.app}>
-        <SearchHeader
-          onSearchVideo={handleSearhVideos}
-          onMainPage={handleMainPage}
-        />
-      <section className={styles.content}>
-        {selectVideo && (
-          <div className={styles.detail}>
-            <VideoDetail video={selectVideo} subcribCount={subcribCount} />
-          </div>
-        )}
-        <div className={styles.list}>
-          <VideoList
-            videos={videos}
-            onClickVideo={handleVideoDetail}
-            display={display}
-            searchKeyword={display}
-          />
-        </div>
-      </section>
-    </div>
+    <>
+      <SearchHeader
+        onSearchVideo={handleSearhVideos}
+        onMainPage={handleMainPage}
+      />
+      <main>
+        <section className={styles.contents}>
+          {selectVideo && (
+            <article className={styles.detail}>
+              <VideoDetail video={selectVideo} subcribCount={subcribCount} />
+            </article>
+          )}
+          <article className={styles.video__list}>
+            <VideoList
+              videos={videos}
+              onClickVideo={handleVideoDetail}
+              display={display}
+              searchKeyword={display}
+            />
+          </article>
+        </section>
+      </main>
+    </>
   );
 }
 

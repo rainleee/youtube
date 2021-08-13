@@ -1,13 +1,30 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: 1rem;
-  font-weight: normal;
+.thumbnails {
+  width: 100%;
 }
 
+.metadata .title {
+  display: -webkit-box;
+  margin: 10px 0px;
+  height: 40px;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.channel {
+  font-size: 0.8rem;
+  color: #757575;
+}
+
+.channel:hover {
+  color: #494949;
+}
+
+/* ----------------------- */
+
+/* 
 .container {
   display: grid;
   list-style: none;
@@ -20,10 +37,6 @@ h6 {
   align-items: center;
   cursor: pointer;
   transition: transform 250ms ease-in;
-}
-
-.video:hover {
-  transform: scale(1.02);
 }
 
 .thumbnails {
@@ -78,4 +91,5 @@ h6 {
   word-wrap: break-word;
   line-height: 1.2em;
   height: 3.6em;
-}
+} 
+*/

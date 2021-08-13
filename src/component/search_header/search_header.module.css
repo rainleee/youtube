@@ -7,7 +7,12 @@
 
 .header {
   display: flex;
+  height: 3.5rem;
   border-bottom: 0.0625rem solid #a8a7a7;
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: white;
 }
 
 .menu {
@@ -75,7 +80,7 @@
 }
 
 .button:hover {
-  /* 색상수정 필요, 돋보기는 after를 이용해서 시도해보기 */
+  /* TODO: 색상수정 필요, 돋보기는 after를 이용해서 시도해보기 */
   background: var(--search-bar-color);
 }
 

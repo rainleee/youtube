@@ -2,8 +2,9 @@ body {
   font-family: "Noto Sans KR", sans-serif;
 }
 
-.content {
+.contents {
   /* max-width: 80rem; */
+  padding-top: 7rem;
   display: flex;
   justify-content: center;
 }
@@ -12,6 +13,8 @@ body {
   flex: 1 1 70%;
 }
 
-.list {
-  flex: 1 1 30%;
+.video__list {
+  margin: 0 5.5rem;
+  /* flex: 1 1 30%; */
+  flex: 1;
 }

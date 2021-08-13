@@ -16,18 +16,18 @@ const VideoItem = memo(
         className={`${styles.container} ${displayType} ${searchDisplay}`}
         onClick={onClickVideoBox}
       >
-        <div className={`${styles.video} ${searchDisplay}`}>
-          <img
-            className={styles.thumbnails}
-            src={snippet.thumbnails.medium.url}
-            alt={snippet.title}
-          />
-          <div className={styles.metadata}>
-            <h3 className={styles.title}>{snippet.title}</h3>
-            <p className={styles.channel}>{snippet.channelTitle}</p>
-            {/* {viewCount} */}
-          </div>
+        {/* <div className={`${styles.video} ${searchDisplay}`}> */}
+        <img
+          className={styles.thumbnails}
+          src={snippet.thumbnails.medium.url}
+          alt={snippet.title}
+        />
+        <div className={styles.metadata}>
+          <h1 className={styles.title}>{snippet.title}</h1>
+          <p className={styles.channel}>{snippet.channelTitle}</p>
+          {/* {viewCount} */}
         </div>
+        {/* </div> */}
       </li>
     );
   }

@@ -1,37 +1,17 @@
-li,
-ul {
-  list-style: none;
-  padding-left: 0;
-  margin-top: 0;
-}
-
 .videos {
-  margin-top: 1.875rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(22.5rem, 1fr));
-  grid-auto-rows: minmax(18.75rem, auto);
-  grid-auto-columns: 22.5rem;
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 2rem 1rem;
 }
 
+.videos:hover {
+  cursor: pointer;
+}
+
+/*
 .videos.videoPlayer {
   margin: 0.2rem 0 0 0.3125rem;
   display: flex;
   flex-flow: column wrap;
 }
-
-.title > h1 {
-  font-size: 1.5rem;
-}
-
-@media screen and (max-width: 66.875rem) {
-  .main {
-    display: grid;
-    justify-content: center;
-    margin: 0 3rem;
-  }
-
-  .videos {
-    grid-template-columns: repeat(auto-fill, minmax(22.5rem, 1fr));
-  }
-}
+*/
