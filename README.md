@@ -1,9 +1,12 @@
 # react와 youtube APIs를 활용한 나만의 youtube site 만들기
 
+21.08.13
+
+이 웹은 현재 PC버전만 지원하며, 차후 반응형웹을 적용해 최종적으로 모바일웹으로 구현할 예정입니다.
+
 # youtube DATA APIs
 
 <!-- 전체개요 작성 -->
-전체개요1
 
 # Code Refactoring (코드 퀄리티를 높이기 위한 시도)
 

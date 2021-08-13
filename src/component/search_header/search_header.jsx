@@ -29,7 +29,7 @@ const SearchHeader = memo(({ onSearchVideo, onMainPage }) => {
   return (
     <header className={styles.header}>
       <div className={styles.menu}>
-        <i className='fas fa-bars'></i>
+        <i className="fas fa-bars"></i>
       </div>
       <div className={styles.container}>
         <div className={styles.logo} onClick={onClickMainPage}>
@@ -49,7 +49,7 @@ const SearchHeader = memo(({ onSearchVideo, onMainPage }) => {
             type="submit"
             onClick={onClickSearch}
           >
-            <i className='fas fa-search'></i>
+            <i className="fas fa-search"></i>
           </button>
         </div>
         <div className={styles.privacy__info}>

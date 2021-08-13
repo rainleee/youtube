@@ -7,11 +7,11 @@ const VideoList = ({ videos, onClickVideo, display, searchKeyword }) => {
 
   return (
     <main className={styles.main}>
-      {!display && (
+      {/* {!display && (
         <div className={styles.title}>
           <h1>인기 급상승 동영상</h1>
         </div>
-      )}
+      )} */}
       <ul className={`${styles.videos} ${displayType}`}>
         {videos.map(video => (
           <VideoItem

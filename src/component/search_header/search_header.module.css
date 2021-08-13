@@ -1,7 +1,6 @@
 :root {
-  /* --logo-font-style: "Oswald", sans-serif; */
   --search-bar-color: #a8a7a7;
-  --container-both-sides-margin: 1.875rem;
+  --container-both-sides-margin: 3rem;
   --privacy-info-notice-color: #606060;
   --privacy-info-profile-color: #b4004e;
 }
@@ -12,10 +11,10 @@
 }
 
 .menu {
-  /* display: flex; */
-  position: relative;
-  /* top: 2rem; */
-  /* left: 1rem; */
+  font-size: 20px;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
 }
 
 .container {
@@ -88,7 +87,7 @@
 }
 
 .privacy__info svg {
-  margin-right: 0.9375rem;
+  margin-left: 2rem;
 }
 
 .notice {
