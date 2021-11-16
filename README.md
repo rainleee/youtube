@@ -36,17 +36,17 @@
 
   - Node js v 16.10
   - NPM
-  - yarn
+  - Yarn
   - Youtube APIs
 
 ## Prerequisite
 
-- youtube API key
-- 노드환경파일 .env에 API key를 보관하였다. 각자의 환경에 맞춰서 API key를 공개하지 말고 구현할 것.
+- Youtube APIs key
+- 노드환경파일 .env에 APIs key를 보관하였다. 각자의 환경에 맞춰서 APIs key를 공개하지 말고 구현할 것.
 
 # 2장 Code Refactoring
 
-## 2-1장 비동기통신 fetch API에서 axios 라이브러리로 변경
+## 2-1장 비동기통신 fetch API에서 Axios 라이브러리로 변경
 
 ### Axios로 Refactoring한 이유
 
@@ -91,17 +91,17 @@ async mostPopular() {
 
 같은 mostPopular()를 작성하였을 때 코드 가독성이다. 어느 것이 더 직관성이 좋은 것 같은가?
 
-fetch()는 인자 값에 URL을 String으로 작성하여 baseURL과 param의 값이 한눈에 들어오지 않지만,axios 라이브러리를 이용할 경우 params option을 이용하여 작성하니 한눈에 알아볼 수 있게 직관성과 가독성이 좋은 코드를 작성할 수 있었다.
+fetch()는 인자 값에 URL을 String으로 작성하여 baseURL과 param의 값이 한눈에 들어오지 않지만,Axios 라이브러리를 이용할 경우 params option을 이용하여 작성하니 한눈에 알아볼 수 있게 직관성과 가독성이 좋은 코드를 작성할 수 있었다.
 
 ### **21-07-28 Axios로 변경 후 URL 호출 이슈**
 
 ---
 
-fetch()에서 전체 URL을 적어서 보내던 방식에서 axios를 이용해서 axios.create()를 통해 baseURL와 option을 설정하고, get() method를 사용해서 params option을 이용해 값을 return해 오는 코드로 변경하였다.
+fetch()에서 전체 URL을 적어서 보내던 방식에서 Axios를 이용해서 axios.create()를 통해 baseURL와 option을 설정하고, get() method를 사용해서 params option을 이용해 값을 return해 오는 코드로 변경하였다.
 
 fetch로 작성했을 때와는 다른 이슈가 발생했는데 바로 **Duplicate key error**.
 
-youtube APIs URL을 호출할 때, part라는 param의 key를 value가 다르게 2번 호출하는데, 이를 아래와 같이 호출할 경우 **Duplicate key error**로 인해 올바른 호출을 수행할 수 없었다.
+Youtube APIs URL을 호출할 때, part라는 param의 key를 value가 다르게 2번 호출하는데, 이를 아래와 같이 호출할 경우 **Duplicate key error**로 인해 올바른 호출을 수행할 수 없었다.
 
 ```javaScript
 params: {
@@ -125,7 +125,7 @@ params: {
     part=snippet&part=statistics
 ```
 
-처음에는 HTTP 통신 status가 200 OK가 떠서 query string이 잘못된 지 몰랐지만, 안에 data가 올바르게 들어있지 않은 걸 보고 역추적하다가 query string이 youtube API가 읽지 못하는 문법으로 request 되고 있는 것을 발견했다. Array에 넣고 중복키 이슈를 없애면 손쉽게 끝날 줄 알았는데 여기서부터 무지에 의한 삽질이 시작되었다.
+처음에는 HTTP 통신 status가 200 OK가 떠서 query string이 잘못된 지 몰랐지만, 안에 data가 올바르게 들어있지 않은 걸 보고 역추적하다가 query string이 Youtube APIs가 읽지 못하는 문법으로 request 되고 있는 것을 발견했다. Array에 넣고 중복키 이슈를 없애면 손쉽게 끝날 줄 알았는데 여기서부터 무지에 의한 삽질이 시작되었다.
 
 여러 가지를 검색 후 해결에 도움이 된 곳은 [stackOverflow](https://stackoverflow.com/questions/49944387/how-to-correctly-use-axios-params-with-arrays) 글이었다.
 
