@@ -10,6 +10,15 @@
 
 - Project Name: Youtube clone coding
 
+1. [프로젝트 설명](#1장-프로젝트설명)
+   - [Environment](#environment)
+   - [Prerequisite](#prerequisite)
+2. [Code Refactoring](#2장-code-refactoring)
+   1. [Axios](#2-1장-비동기통신-fetch-api에서-axios-라이브러리로-변경)
+      - [Fetch API에서 Axios로 리팩토링한 이유는?](#axios로-refactoring한-이유)
+      - [Axios로 변경 후 URL 호출 이슈](#21-07-28-Axios로-변경-후-URL-호출-이슈)
+3. [마무리하며](#3장-마무리하며)
+
 ## 1장 프로젝트설명
 
 ## Environment
@@ -43,7 +52,7 @@
 
 - 뛰어난 브라우저 호환성
 
-|                                                                                                                                     Fetch API                                                                                                                                      |                                                                                                       axios                                                                                                        |
+|                                                                                                                                     Fetch API                                                                                                                                      |                                                                                                       Axios                                                                                                        |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | <img src="https://user-images.githubusercontent.com/50471668/127454334-b41eda40-3eaf-4f21-a4b0-9a41eb73530c.png" width="600" height="200" alt="Fetch API 브라우저 호환성"> [참조링크](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) | <img src="https://user-images.githubusercontent.com/50471668/127454355-7f8f2bf2-3dcb-41e1-b8fe-26bbd4b1ad40.png" width="600" height="200" alt="axops 브라우저 호환성" > [참조링크](https://github.com/axios/axios) |
 
@@ -84,7 +93,7 @@ async mostPopular() {
 
 fetch()는 인자 값에 URL을 String으로 작성하여 baseURL과 param의 값이 한눈에 들어오지 않지만,axios 라이브러리를 이용할 경우 params option을 이용하여 작성하니 한눈에 알아볼 수 있게 직관성과 가독성이 좋은 코드를 작성할 수 있었다.
 
-### **21.07.28 axios로 변경 후 URL 호출 이슈**
+### **21-07-28 Axios로 변경 후 URL 호출 이슈**
 
 ---
 
