@@ -6,7 +6,7 @@
 
 - 이 웹 프로젝트는 현재 PC 버전만 지원하며, 크롬 기준으로 개발되었습니다. 다른 브라우저상에서 제대로 나오지 않을 수 있습니다.
 
-## index
+## Index
 
 - Project Name: Youtube clone coding
 
