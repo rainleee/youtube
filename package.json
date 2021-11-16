@@ -1,6 +1,7 @@
 {
-  "name": "template",
-  "version": "0.1.0",
+  "name": "Youtube-clone",
+  "version": "1.0.0",
+  "description": "MW's Youtube clone coding with React v17",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
