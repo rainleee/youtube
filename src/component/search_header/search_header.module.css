@@ -80,7 +80,6 @@
 }
 
 .button:hover {
-  /* TODO: 색상수정 필요, 돋보기는 after를 이용해서 시도해보기 */
   background: var(--search-bar-color);
 }
 

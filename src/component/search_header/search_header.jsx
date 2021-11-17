@@ -1,5 +1,5 @@
-import React, { memo, useRef } from "react";
-import styles from "./search_header.module.css";
+import React, { memo, useRef } from 'react';
+import styles from './search_header.module.css';
 
 const SearchHeader = memo(({ onSearchVideo, onMainPage }) => {
   const searchInput = useRef();
@@ -12,7 +12,7 @@ const SearchHeader = memo(({ onSearchVideo, onMainPage }) => {
 
   //search Enter event
   const onKeyPress = event => {
-    if (event.key === "Enter") onSearchEvent();
+    if (event.key === 'Enter') onSearchEvent();
   };
 
   //search button click event
@@ -23,7 +23,7 @@ const SearchHeader = memo(({ onSearchVideo, onMainPage }) => {
   //logoClick event
   const onClickMainPage = () => {
     onMainPage();
-    searchInput.current.value = "";
+    searchInput.current.value = '';
   };
 
   return (
